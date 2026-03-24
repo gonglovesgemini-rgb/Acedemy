@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แผนการจัดการเรียนรู้ดิจิทัล: การอ่านและการแปลความหมายแผนที่</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        body { font-family: 'Sarabun', sans-serif; background-color: #f3f4f6; }
+        h1, h2, h3, h4, h5, h6, .font-prompt { font-family: 'Prompt', sans-serif; }
+        .math-display { overflow-x: auto; overflow-y: hidden; }
+
+        /* Rainbow & Blink Animations */
+        @keyframes rainbowBg {
+            0% { background-color: #ff0000; }
+            14% { background-color: #ff7f00; }
+            28% { background-color: #ffff00; }
+            42% { background-color: #00ff00; }
+            57% { background-color: #0000ff; }
+            71% { background-color: #4b0082; }
+            85% { background-color: #9400d3; }
+            100% { background-color: #ff0000; }
+        }
+        @keyframes rainbowText {
+            0% { color: #ff0000; }
+            14% { color: #ff7f00; }
+            28% { color: #d4af37; } /* Darker yellow for text readability */
+            42% { color: #00aa00; } /* Darker green for text readability */
+            57% { color: #0000ff; }
+            71% { color: #4b0082; }
+            85% { color: #9400d3; }
+            100% { color: #ff0000; }
+        }
+        @keyframes rainbowBorder {
+            0% { border-color: #ff0000; }
+            14% { border-color: #ff7f00; }
+            28% { border-color: #ffff00; }
+            42% { border-color: #00ff00; }
+            57% { border-color: #0000ff; }
+            71% { border-color: #4b0082; }
+            85% { border-color: #9400d3; }
+            100% { border-color: #ff0000; }
+        }
+        @keyframes blinkEffect {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .theme-bg-rainbow {
+            animation: rainbowBg 2s infinite linear;
+            color: white !important;
+        }
+        .theme-bg-rainbow-blink {
+            animation: rainbowBg 0.5s infinite linear, blinkEffect 0.3s infinite linear;
+            color: white !important;
+        }
+        .theme-text-rainbow {
+            animation: rainbowText 2s infinite linear;
+        }
+        .theme-text-rainbow-blink {
+            animation: rainbowText 0.5s infinite linear, blinkEffect 0.3s infinite linear;
+        }
+        .theme-border-rainbow {
+            animation: rainbowBorder 1.5s infinite linear;
+        }
+        .theme-border-rainbow-blink {
+            animation: rainbowBorder 0.5s infinite linear, blinkEffect 0.3s infinite linear;
+        }
+    </style>
+</head>
+<body class="text-gray-800 pb-20">
+
+    <!-- Navbar -->
+    <nav class="theme-bg-rainbow-blink p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-earth-asia text-2xl text-white drop-shadow-md"></i>
+                <div>
+                    <span class="font-bold text-lg font-prompt block leading-tight text-white drop-shadow-md">Digital Lesson Plan</span>
+                    <span class="text-xs text-white drop-shadow-md">Active Learning & Technology Integration</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto max-w-5xl p-4 md:p-8 my-6 bg-white shadow-xl rounded-xl border-4 theme-border-rainbow">
+        
+        <!-- Header: School & Teacher Info -->
+        <header class="border-b-8 theme-border-rainbow pb-6 mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+                <div class="flex-1">
+                    <h5 class="theme-text-rainbow font-bold uppercase tracking-wide text-sm mb-1">กลุ่มสาระการเรียนรู้สังคมศึกษา ศาสนา และวัฒนธรรม</h5>
+                    <h1 class="text-3xl md:text-4xl font-bold font-prompt theme-text-rainbow-blink">โรงเรียนมัธยมศึกษา</h1>
+                    <div class="mt-4 space-y-1">
+                        <h2 class="text-2xl font-bold theme-text-rainbow">เรื่อง การอ่านและการแปลความหมายแผนที่</h2>
+                        <h3 class="text-lg text-gray-500 font-light">(Map Reading, Interpretation and GIS Application)</h3>
+                    </div>
+                </div>
+                
+                <div class="p-5 rounded-xl border-4 theme-border-rainbow min-w-[280px] shadow-sm bg-white">
+                    <div class="flex items-center gap-3 mb-2 border-b-2 theme-border-rainbow pb-2">
+                        <div class="theme-bg-rainbow w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-user-tie"></i></div>
+                        <div>
+                            <p class="text-xs text-gray-500">ครูผู้สอน</p>
+                            <p class="font-bold theme-text-rainbow">นายยุทธกานต์ อินถาอ้าย</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm text-gray-700 font-bold">
+                        <p class="flex justify-between"><span><i class="fa-solid fa-book mr-2 theme-text-rainbow"></i>วิชา:</span> <span class="theme-text-rainbow">สังคมศึกษา 4 (ส31102)</span></p>
+                        <p class="flex justify-between"><span><i class="fa-solid fa-layer-group mr-2 theme-text-rainbow"></i>ชั้น:</span> <span class="theme-text-rainbow">มัธยมศึกษาปีที่ 4</span></p>
+                        <p class="flex justify-between"><span><i class="fa-solid fa-calendar-alt mr-2 theme-text-rainbow"></i>ภาคเรียน:</span> <span class="theme-text-rainbow">ภาคเรียนที่ 2</span></p>
+                        <p class="flex justify-between"><span><i class="fa-regular fa-clock mr-2 theme-text-rainbow"></i>เวลา:</span> <span class="theme-text-rainbow">4 คาบ (200 นาที)</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Innovation Link & Download Button -->
+            <div class="mt-6 p-4 theme-bg-rainbow-blink rounded-lg shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 border-2 border-white">
+                <div class="flex items-center gap-4">
+                    <div class="bg-white p-3 rounded-full shadow">
+                        <i class="fa-solid fa-map-location-dot text-2xl theme-text-rainbow-blink"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg font-prompt text-white drop-shadow-md">สื่อการสอนนวัตกรรม (Interactive Platform)</h3>
+                        <p class="text-white drop-shadow-md text-sm font-bold">Google Earth Web & My Maps - Geospatial Technology</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                    <!-- New Button: Download -->
+                    <a href="#" target="_blank" class="bg-white theme-text-rainbow-blink border-2 theme-border-rainbow px-5 py-2 rounded-full font-bold hover:bg-gray-100 transition shadow-md flex items-center justify-center text-sm whitespace-nowrap">
+                        <i class="fa-brands fa-google-drive mr-2"></i> ดาวน์โหลดแผนฯ
+                    </a>
+                    
+                    <!-- Existing Button: Open App -->
+                    <a href="https://earth.google.com/web/" target="_blank" class="bg-black text-white px-6 py-2 rounded-full font-bold hover:bg-gray-800 transition shadow-md transform hover:scale-105 flex items-center justify-center whitespace-nowrap border-2 theme-border-rainbow-blink">
+                        <i class="fa-solid fa-globe mr-2"></i> สำรวจ Google Earth
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left Column: Info & Standards -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Learning Outcomes -->
+                <div class="bg-white p-5 rounded-lg border-l-8 theme-border-rainbow-blink shadow-lg">
+                    <h3 class="font-bold text-lg theme-text-rainbow mb-3 font-prompt">
+                        <i class="fa-solid fa-scroll mr-2"></i> ผลการเรียนรู้
+                    </h3>
+                    <p class="text-sm text-gray-700 leading-relaxed text-justify">
+                        "อธิบายความหมาย ประเภท และองค์ประกอบของแผนที่ สามารถอ่านและแปลความหมายจากแผนที่รูปแบบต่างๆ ตลอดจน<b>ประยุกต์ใช้เทคโนโลยีภูมิสารสนเทศ (GIS) และแผนที่ในการวิเคราะห์พื้นที่และแก้ปัญหาในชีวิตประจำวันได้อย่างมีประสิทธิภาพ</b>"
+                    </p>
+                </div>
+
+                <!-- Concept & Equations -->
+                <div class="bg-white p-5 rounded-lg border-4 theme-border-rainbow shadow-lg">
+                    <h3 class="font-bold text-lg mb-3 font-prompt flex items-center theme-text-rainbow">
+                        <i class="fa-solid fa-compass-drafting mr-2"></i> แก่นความรู้ & การคำนวณ
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="p-3 rounded text-center border-2 theme-border-rainbow bg-white">
+                            <span class="text-xs text-gray-500 block mb-1">องค์ประกอบหลักของแผนที่ 5 ประการ</span>
+                            <div class="text-sm font-bold theme-text-rainbow-blink mt-2 text-lg">
+                                ชื่อแผนที่ • ทิศ • มาตราส่วน • สัญลักษณ์ • ขอบระวาง
+                            </div>
+                        </div>
+                        <div class="p-3 rounded text-center border-2 theme-border-rainbow bg-white">
+                            <span class="text-xs text-gray-500 block mb-1">สมการการคำนวณมาตราส่วน (Scale)</span>
+                            <div class="math-display text-sm font-bold">
+                                $$ \text{มาตราส่วน} = \frac{\text{ระยะทางบนแผนที่}}{\text{ระยะทางจริงบนพื้นที่}} $$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Objectives -->
+                <div class="bg-white p-5 rounded-lg border-4 theme-border-rainbow shadow-lg">
+                    <h3 class="font-bold text-lg mb-3 font-prompt theme-text-rainbow">
+                        <i class="fa-solid fa-bullseye mr-2"></i> จุดประสงค์ (KPA)
+                    </h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex gap-2 items-start">
+                            <span class="badge theme-bg-rainbow px-2 rounded font-bold shadow">K</span>
+                            <span class="font-bold">นักเรียนสามารถอธิบายองค์ประกอบ ประเภท และความสำคัญของแผนที่ได้อย่างถูกต้อง</span>
+                        </li>
+                        <li class="flex gap-2 items-start">
+                            <span class="badge theme-bg-rainbow px-2 rounded font-bold shadow">P</span>
+                            <span class="font-bold">นักเรียนสามารถคำนวณมาตราส่วน อ่านพิกัดภูมิศาสตร์ และสร้างแผนที่ดิจิทัลได้</span>
+                        </li>
+                        <li class="flex gap-2 items-start">
+                            <span class="badge theme-bg-rainbow px-2 rounded font-bold shadow">A</span>
+                            <span class="font-bold">นักเรียนตระหนักถึงความสำคัญของการใช้เครื่องมือทางภูมิศาสตร์ และทำงานร่วมกับผู้อื่นอย่างมีความรับผิดชอบ</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column: Learning Process -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl border-4 theme-border-rainbow shadow-xl overflow-hidden">
+                    <div class="theme-bg-rainbow-blink p-4 border-b-4 border-white flex justify-between items-center">
+                        <h3 class="font-bold text-xl font-prompt text-white drop-shadow-md">
+                            <i class="fa-solid fa-route mr-2"></i> กิจกรรมการเรียนรู้ (Inquiry & Task-Based Learning)
+                        </h3>
+                    </div>
+
+                    <div class="p-6 space-y-8">
+                        
+                        <!-- Step 1 -->
+                        <div class="relative pl-8 border-l-4 theme-border-rainbow">
+                            <div class="absolute -left-[20px] top-0 theme-bg-rainbow-blink border-2 border-white text-white w-9 h-9 rounded-full flex items-center justify-center font-bold text-lg shadow-lg">1</div>
+                            <h4 class="font-bold theme-text-rainbow font-prompt text-xl">ขั้นกระตุ้นความสนใจ (Hook & Engagement) <span class="text-xs bg-black text-white px-2 py-1 rounded ml-2 shadow">20 นาที</span></h4>
+                            <div class="mt-3 text-gray-800 text-sm space-y-3">
+                                <p>• <b>Stimulus:</b> ครูเปิดภาพถ่ายดาวเทียมสถานที่สำคัญระดับโลกผ่าน Google Maps ทายปัญหา "ที่นี่คือที่ไหน? และเรารู้ได้อย่างไรว่ามันอยู่ตรงไหนของโลก?"</p>
+                                
+                                <div class="mt-3 mb-3">
+                                    <div class="bg-white border-2 theme-border-rainbow rounded-lg p-3 shadow-md">
+                                        <p class="text-sm font-bold theme-text-rainbow-blink mb-2 text-lg"><i class="fa-solid fa-satellite mr-2"></i>สื่อประกอบ: Interactive Map Simulation</p>
+                                        <!-- Map Display -->
+                                        <div class="relative w-full aspect-video rounded-lg overflow-hidden shadow-inner bg-gray-200 border-2 theme-border-rainbow">
+                                            <iframe 
+                                                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d124032.22858828987!2d100.50144!3d13.75398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sth!2sth!4v1710000000000" 
+                                                class="absolute top-0 left-0 w-full h-full border-0" 
+                                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                            </iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p>• <b>Discussion:</b> นำเข้าสู่บทเรียนโดยชวนคิดว่า "ถ้าโลกนี้ไม่มีแผนที่ มนุษย์จะดำรงชีวิตและติดต่อสื่อสารกันอย่างไร?"</p>
+                                <p>• <b>Onboarding:</b> มอบหมายบทบาทสมมติให้ผู้เรียนเป็น "นักสำรวจภูมิศาสตร์ (The Geo-Explorers)"</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative pl-8 border-l-4 theme-border-rainbow">
+                            <div class="absolute -left-[20px] top-0 theme-bg-rainbow-blink border-2 border-white text-white w-9 h-9 rounded-full flex items-center justify-center font-bold text-lg shadow-lg">2</div>
+                            <h4 class="font-bold theme-text-rainbow font-prompt text-xl">ขั้นสำรวจและถอดรหัส (Exploration & Decoding) <span class="text-xs bg-black text-white px-2 py-1 rounded ml-2 shadow">40 นาที</span></h4>
+                            <div class="mt-3 text-gray-800 text-sm space-y-3">
+                                <span class="inline-block theme-bg-rainbow text-white text-xs px-3 py-1 rounded-full font-bold mb-1 shadow">[Collaborative Learning] กิจกรรม: นักถอดรหัสแผนที่ (Map Decoding)</span>
+                                <p>• <b>Group Formation:</b> แบ่งนักเรียนออกเป็นกลุ่ม กลุ่มละ 4-5 คน</p>
+                                <p>• <b>Mission:</b> ครูแจก "แผนที่ภูมิประเทศจำลอง" และ "แผนที่ท่องเที่ยว" ให้แต่ละกลุ่ม นักเรียนต้องร่วมกันค้นหาและวงกลมระบุองค์ประกอบของแผนที่ (ชื่อ, ทิศ, มาตราส่วน, ขอบระวาง, สัญลักษณ์)</p>
+                                <p>• <b>Gamification:</b> กลุ่มที่สามารถระบุองค์ประกอบครบถ้วนและอธิบายความหมายของสัญลักษณ์ได้รวดเร็วที่สุด 3 อันดับแรก รับป้ายประกาศนักสำรวจฝึกหัด</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Explanation -->
+                        <div class="relative pl-8 border-l-4 theme-border-rainbow">
+                            <div class="absolute -left-[20px] top-0 theme-bg-rainbow-blink border-2 border-white text-white w-9 h-9 rounded-full flex items-center justify-center font-bold text-lg shadow-lg">3</div>
+                            <h4 class="font-bold theme-text-rainbow font-prompt text-xl">ขั้นฝึกปฏิบัติและวิเคราะห์ (Practice & Analysis) <span class="text-xs bg-black text-white px-2 py-1 rounded ml-2 shadow">40 นาที</span></h4>
+                            <div class="mt-3 text-gray-800 text-sm space-y-3">
+                                <span class="inline-block theme-bg-rainbow text-white text-xs px-3 py-1 rounded-full font-bold mb-1 shadow">[Analytical Skill] กิจกรรม: นักบินนำทาง (The Navigator)</span>
+                                <p>• <b>Concept Breakdown:</b> ครูอธิบายหลักการทำงานของ "พิกัดภูมิศาสตร์ (ละติจูด/ลองจิจูด)" และการคำนวณ "มาตราส่วน"</p>
+                                <p>• <b>Case Study Challenge:</b> ครูให้โจทย์สถานการณ์จำลอง เช่น "กลุ่มของนักเรียนกำลังหลงป่า โดยรู้พิกัดจากวิทยุสื่อสาร และมีแผนที่มาตราส่วน 1:50,000 ถ้าระยะทางในแผนที่จากจุดนี้ถึงหมู่บ้านคือ 8 เซนติเมตร นักเรียนต้องเดินเท้ากี่กิโลเมตร?"</p>
+                                <p>• <b>Correction:</b> สุ่มตัวแทนกลุ่มออกมาแสดงวิธีคิดบนกระดาน ครูคอยแก้ไขความเข้าใจที่คลาดเคลื่อน</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="relative pl-8 border-l-4 theme-border-rainbow">
+                            <div class="absolute -left-[20px] top-0 theme-bg-rainbow-blink border-2 border-white text-white w-9 h-9 rounded-full flex items-center justify-center font-bold text-lg shadow-lg">4</div>
+                            <h4 class="font-bold theme-text-rainbow font-prompt text-xl">ขั้นประยุกต์ใช้และสร้างสรรค์ (Application & Creation) <span class="text-xs bg-black text-white px-2 py-1 rounded ml-2 shadow">70 นาที</span></h4>
+                            <div class="mt-3 text-gray-800 text-sm space-y-3">
+                                <span class="inline-block theme-bg-rainbow text-white text-xs px-3 py-1 rounded-full font-bold mb-1 shadow">[Task-Based Learning] กิจกรรม: นักผังเมืองดิจิทัล (Digital City Planners)</span>
+                                <p>• <b>Tech Integration:</b> ให้นักเรียนแต่ละกลุ่มเข้าใช้แพลตฟอร์ม <b>Google My Maps</b> ผ่านสมาร์ทโฟนหรือแท็บเล็ต</p>
+                                <p>• <b>Task:</b> สร้าง "แผนที่เฉพาะเรื่อง (Thematic Map)" ของชุมชนตนเองหรือโรงเรียน โดยให้เลือก 1 หัวข้อ เช่น: 1) แผนที่เส้นทางอพยพหนีภัยพิบัติ 2) แผนที่ลายแทงร้านอาหารเด็ดรอบโรงเรียน 3) แผนที่จุดเสี่ยงอันตรายในชุมชน</p>
+                                <p>• <b>Requirements:</b> แผนที่ดิจิทัลต้องมีการปักหมุดพิกัด (Placemarks) อย่างน้อย 5 จุด, มีการวาดเส้นทาง (Lines), และใส่คำอธิบายพร้อมรูปภาพประกอบ</p>
+                            </div>
+                        </div>
+
+                         <!-- Step 5 -->
+                         <div class="relative pl-8 border-l-4 theme-border-rainbow">
+                            <div class="absolute -left-[20px] top-0 theme-bg-rainbow-blink border-2 border-white text-white w-9 h-9 rounded-full flex items-center justify-center font-bold text-lg shadow-lg">5</div>
+                            <h4 class="font-bold theme-text-rainbow font-prompt text-xl">ขั้นประเมินผลและสะท้อนคิด (Evaluation & Reflection) <span class="text-xs bg-black text-white px-2 py-1 rounded ml-2 shadow">30 นาที</span></h4>
+                            <div class="mt-3 text-gray-800 text-sm space-y-3">
+                                <span class="inline-block theme-bg-rainbow text-white text-xs px-3 py-1 rounded-full font-bold mb-1 shadow">[Showcase & Peer Review]</span>
+                                <p>• <b>Presentation:</b> ตัวแทนกลุ่มแชร์ลิงก์ Google My Maps ขึ้นจอและนำเสนอผลงานแผนที่ของกลุ่มตนเองภายในเวลา 3 นาที</p>
+                                <p>• <b>Peer Evaluation:</b> นักเรียนร่วมกันโหวตแผนที่ที่เข้าใจง่ายและนำไปใช้ได้จริงมากที่สุด</p>
+                                <p>• <b>Debriefing:</b> ครูและนักเรียนร่วมกันสรุปบทเรียนเชื่อมโยงสู่ชีวิตจริง ว่าแผนที่และเทคโนโลยีภูมิสารสนเทศมีอิทธิพลต่อเศรษฐกิจ สังคม และความปลอดภัยในยุคปัจจุบันอย่างไร</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Post Lesson Reflection -->
+        <section class="mt-8 bg-white p-6 rounded-xl shadow-lg border-t-8 theme-border-rainbow-blink break-inside-avoid">
+            <h3 class="font-bold text-2xl mb-4 font-prompt flex items-center theme-text-rainbow-blink">
+                <i class="fa-solid fa-clipboard-check mr-3"></i> บันทึกหลังการจัดการเรียนรู้ (สำหรับครูผู้สอน)
+            </h3>
+            
+            <form id="reflectionForm" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <!-- Hidden Fields for Metadata -->
+                <input type="hidden" name="teacher" value="นายยุทธกานต์ อินถาอ้าย">
+                <input type="hidden" name="subject" value="สังคมศึกษา 4 (ส31102)">
+                <input type="hidden" name="date" id="currentDate">
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-bold theme-text-rainbow text-lg">1. ผลสัมฤทธิ์ทางการเรียน (จำนวน ผ่าน/ไม่ผ่าน)</label>
+                    <textarea name="result" id="result" class="w-full p-3 border-4 theme-border-rainbow rounded-lg focus:outline-none h-32 resize-none shadow-inner bg-gray-50" placeholder="เช่น นักเรียนผ่านเกณฑ์การสร้างแผนที่ดิจิทัล 38 คน ไม่ผ่าน 2 คน..."></textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-bold theme-text-rainbow text-lg">2. ปัญหาและอุปสรรค</label>
+                    <textarea name="problems" id="problems" class="w-full p-3 border-4 theme-border-rainbow rounded-lg focus:outline-none h-32 resize-none shadow-inner bg-gray-50" placeholder="เช่น อินเทอร์เน็ตโรงเรียนช้าขณะนักเรียนเข้าใช้งาน Google My Maps..."></textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-bold theme-text-rainbow text-lg">3. ข้อเสนอแนะ / แนวทางแก้ไข</label>
+                    <textarea name="suggestions" id="suggestions" class="w-full p-3 border-4 theme-border-rainbow rounded-lg focus:outline-none h-32 resize-none shadow-inner bg-gray-50" placeholder="เช่น จัดเตรียมภาพหน้าจอออฟไลน์ หรือให้ทำเป็นโครงร่างในกระดาษก่อนลงระบบจริง..."></textarea>
+                </div>
+
+                <div class="space-y-2 flex flex-col justify-end">
+                    <div class="bg-white p-4 rounded-lg border-2 theme-border-rainbow text-sm font-bold theme-text-rainbow-blink mb-2 shadow">
+                        <i class="fa-solid fa-info-circle mr-1"></i> ข้อมูลจะถูกส่งไปยัง Google Sheets (Sheet 1: บันทึกหลังสอน)
+                    </div>
+                    <button type="button" onclick="submitToSheet()" class="w-full theme-bg-rainbow-blink text-white font-bold py-4 text-lg rounded-lg shadow-xl border-2 border-white transition transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> บันทึกข้อมูลเข้าระบบ
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Section 2: Supervision Log (New Feature) -->
+        <section class="mt-8 bg-white p-6 rounded-xl shadow-lg border-t-8 theme-border-rainbow-blink break-inside-avoid mb-6">
+            <h3 class="font-bold text-2xl mb-4 font-prompt flex items-center theme-text-rainbow-blink">
+                <i class="fa-solid fa-user-check mr-3"></i> บันทึกและข้อเสนอแนะจากผู้นิเทศ (Supervision Log)
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">
+                <!-- Form Input Area -->
+                <div class="md:col-span-2 space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold theme-text-rainbow mb-1 text-lg">ชื่อผู้นิเทศการสอน</label>
+                        <input type="text" id="supervisorName" class="w-full p-3 border-4 theme-border-rainbow rounded-lg focus:outline-none shadow-inner bg-gray-50" placeholder="ระบุชื่อ-นามสกุล">
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold theme-text-rainbow mb-1 text-lg">ตำแหน่ง</label>
+                            <input type="text" id="supervisorPosition" class="w-full p-3 border-4 theme-border-rainbow rounded-lg focus:outline-none shadow-inner bg-gray-50" placeholder="เช่น ผู้อำนวยการ / หัวหน้ากลุ่มสาระฯ">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold theme-text-rainbow mb-1 text-lg">วิทยฐานะ</label>
+                            <input type="text" id="supervisorLevel" class="w-full p-3 border-4 theme-border-rainbow rounded-lg focus:outline-none shadow-inner bg-gray-50" placeholder="เช่น ชำนาญการพิเศษ / เชี่ยวชาญ">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold theme-text-rainbow mb-1 text-lg">ข้อคิดเห็น / ข้อเสนอแนะเพิ่มเติม</label>
+                        <textarea id="supervisorComment" class="w-full p-3 border-4 theme-border-rainbow rounded-lg focus:outline-none h-32 resize-none shadow-inner bg-gray-50" placeholder="ระบุข้อเสนอแนะสำหรับการปรับปรุงแผนการสอน..."></textarea>
+                    </div>
+                    <button type="button" onclick="submitSupervision()" class="w-full md:w-auto theme-bg-rainbow-blink text-white font-bold py-3 px-8 text-lg rounded-lg shadow-xl border-2 border-white transition transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-save"></i> บันทึกผลการนิเทศ
+                    </button>
+                    <p class="text-xs font-bold theme-text-rainbow mt-2">*ข้อมูลจะถูกส่งไปยัง Google Sheets (Sheet 2: การนิเทศ)</p>
+                </div>
+
+                <!-- Summary & Fetch Area -->
+                <div class="md:col-span-1 bg-white p-5 rounded-lg border-4 theme-border-rainbow shadow-lg flex flex-col">
+                    <h4 class="font-bold text-xl theme-text-rainbow-blink mb-3 border-b-4 theme-border-rainbow pb-2">สรุปผลการนิเทศ</h4>
+                    <div id="supervisionSummaryArea" class="flex-1 overflow-y-auto max-h-[300px] text-sm text-gray-800 space-y-3 mb-4 pr-2">
+                        <p class="text-gray-400 italic text-center mt-4 font-bold">กำลังรอข้อมูล...</p>
+                    </div>
+                    <button type="button" onclick="fetchSupervisionSummary()" class="w-full bg-black text-white border-2 theme-border-rainbow-blink hover:bg-gray-800 font-bold py-3 rounded-lg transition shadow-md flex items-center justify-center">
+                        <i class="fa-solid fa-sync mr-2 theme-text-rainbow-blink"></i> ดึงสรุปข้อมูลล่าสุด
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script for Logic -->
+    <script>
+        // Set Current Date
+        document.getElementById('currentDate').value = new Date().toLocaleDateString('th-TH');
+
+        // URL จาก Google App Script
+        const URL_APP_SCRIPT = 'https://script.google.com/macros/s/AKfycbzz1Q2X7BLPx4nEKVWZLnrxbBdVFgyXYbbOLh1EE1i22_ZTWEmuI_mAbTLIh3m4aGEkgA/exec';
+
+        // --- Logic บันทึกหลังสอน (ใช้ URLSearchParams แทน FormData เพื่อแก้บั๊ก CORS ของ Google) ---
+        function submitToSheet() {
+            const result = document.getElementById('result').value;
+            const problems = document.getElementById('problems').value;
+            const suggestions = document.getElementById('suggestions').value;
+
+            Swal.fire({ title: 'กำลังบันทึก...', didOpen: () => Swal.showLoading() });
+
+            // ใช้ URLSearchParams แทนเพื่อป้องกันปัญหา Header/CORS
+            const params = new URLSearchParams();
+            params.append('type', 'reflection');
+            params.append('teacher', 'นายยุทธกานต์ อินถาอ้าย');
+            params.append('subject', 'สังคมศึกษา 4 (ส31102)');
+            params.append('date', document.getElementById('currentDate').value);
+            params.append('result', result);
+            params.append('problems', problems);
+            params.append('suggestions', suggestions);
+
+            fetch(URL_APP_SCRIPT, { 
+                method: 'POST', 
+                body: params
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === "success") {
+                    Swal.fire('สำเร็จ', 'บันทึกหลังสอนเรียบร้อยแล้ว', 'success');
+                    document.getElementById('result').value = '';
+                    document.getElementById('problems').value = '';
+                    document.getElementById('suggestions').value = '';
+                } else {
+                    throw new Error("Server returned error");
+                }
+            })
+            .catch(err => Swal.fire('Error', 'ไม่สามารถเชื่อมต่อ Google Sheet ได้ (โปรดเช็คสิทธิ์การเข้าถึง App Script ให้เป็น Anyone)', 'error'));
+        }
+
+        // --- Logic การนิเทศ ---
+        function submitSupervision() {
+            const name = document.getElementById('supervisorName').value;
+            const position = document.getElementById('supervisorPosition').value;
+            const level = document.getElementById('supervisorLevel').value;
+            const comment = document.getElementById('supervisorComment').value;
+
+            if(!name || !comment) {
+                Swal.fire('แจ้งเตือน', 'กรุณากรอกชื่อผู้นิเทศและข้อเสนอแนะ', 'warning');
+                return;
+            }
+
+            Swal.fire({ title: 'กำลังส่งข้อมูล...', didOpen: () => Swal.showLoading() });
+
+            const params = new URLSearchParams();
+            params.append('type', 'supervision');
+            params.append('supervisor', name);
+            params.append('position', position);
+            params.append('level', level);
+            params.append('comment', comment);
+            params.append('date', document.getElementById('currentDate').value);
+
+            fetch(URL_APP_SCRIPT, { 
+                method: 'POST', 
+                body: params
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === "success") {
+                    Swal.fire('สำเร็จ', 'บันทึกผลการนิเทศเรียบร้อยแล้ว', 'success');
+                    document.getElementById('supervisorName').value = '';
+                    document.getElementById('supervisorPosition').value = '';
+                    document.getElementById('supervisorLevel').value = '';
+                    document.getElementById('supervisorComment').value = '';
+                    fetchSupervisionSummary(false); // อัพเดทตารางทันที
+                } else {
+                    throw new Error("Server returned error");
+                }
+            })
+            .catch(err => Swal.fire('Error', 'ไม่สามารถเชื่อมต่อ Google Sheet ได้', 'error'));
+        }
+
+        // --- Logic ดึงสรุปผล ---
+        function fetchSupervisionSummary(showLoading = true) {
+            const fetchData = async () => {
+                try {
+                    // ใช้ URL ธรรมดาโดยตรง
+                    const response = await fetch(`${URL_APP_SCRIPT}?t=${new Date().getTime()}`);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const area = document.getElementById('supervisionSummaryArea');
+                    
+                    if (data && data.length > 0 && !data.error) {
+                        area.innerHTML = ''; 
+                        data.forEach(item => {
+                            let dateStr = '';
+                            try {
+                                dateStr = new Date(item.timestamp).toLocaleDateString('th-TH');
+                            } catch(e) {
+                                dateStr = item.date || '';
+                            }
+                            
+                            let positionText = item.position ? item.position : '';
+                            let levelText = item.level ? item.level : '';
+                            let detailText = [positionText, levelText].filter(Boolean).join(' | ');
+
+                            area.innerHTML += `
+                                <div class="bg-white p-3 rounded-lg border-2 theme-border-rainbow shadow-md mb-3">
+                                    <p class="font-bold text-lg theme-text-rainbow-blink mb-1">${item.supervisor}</p>
+                                    ${detailText ? `<p class="text-xs font-bold text-gray-700 mb-2 bg-gray-100 p-1 rounded inline-block">${detailText}</p>` : ''}
+                                    <p class="text-gray-800 font-medium mb-2">"${item.comment}"</p>
+                                    <span class="text-gray-500 text-[10px] font-bold"><i class="fa-regular fa-clock mr-1"></i>${dateStr}</span>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        area.innerHTML = '<p class="text-gray-500 font-bold italic text-center mt-4">ยังไม่มีข้อมูลการนิเทศ</p>';
+                    }
+                } catch (err) {
+                    const area = document.getElementById('supervisionSummaryArea');
+                    area.innerHTML = `
+                        <div class="text-center mt-4">
+                            <p class="text-red-500 font-bold text-sm mb-2"><i class="fa-solid fa-triangle-exclamation"></i> ไม่สามารถดึงข้อมูลได้ (Failed to fetch)</p>
+                            <p class="text-gray-600 text-xs text-left px-2"><strong>วิธีแก้ไข:</strong><br>1. ไปที่ Google Sheet > Extensions > Apps Script<br>2. กด Deploy > Manage Deployments<br>3. กดรูปดินสอ (Edit)<br>4. ตรง Who has access ให้เปลี่ยนเป็น <b>"Anyone" (ทุกคน)</b> เท่านั้น<br>5. กด Deploy ซ้ำอีกครั้ง</p>
+                        </div>
+                    `;
+                }
+            };
+
+            if(showLoading) {
+                Swal.fire({ title: 'กำลังดึงข้อมูล...', timer: 1000, didOpen: () => Swal.showLoading() }).then(() => {
+                    fetchData();
+                });
+            } else {
+                fetchData();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                fetchSupervisionSummary(false); 
+            }, 500);
+        });
+    </script>
+</body>
+</html>
